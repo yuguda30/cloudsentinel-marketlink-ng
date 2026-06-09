@@ -1,0 +1,13 @@
+Flask
+Flask-SQLAlchemy
+Flask-Login
+Werkzeug
+Pillow
+python-dotenv
+Flask-SocketIO
+eventlet
+gunicorn
+gevent
+gevent-websocket
+
+
