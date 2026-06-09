@@ -16,7 +16,7 @@ def new_listing():
         title = request.form.get("title")
         category = request.form.get("category")
         condition = request.form.get("condition")
-        price = request.form.get("price")
+        price = float(request.form.get("price"))
         state = request.form.get("state")
         lga = request.form.get("lga")
         description = request.form.get("description")
@@ -33,17 +33,17 @@ def new_listing():
             return redirect(url_for("listing.new_listing"))
 
         listing = Listing(
-            seller_id=current_user.id,
-            title=title,
-            category=category,
-            condition=condition,
-            price=price,
-            state=state,
-            lga=lga,
-            description=description,
-            image_filename=image_filename,
-            whatsapp_number=phone
-            )
+           seller_id=current_user.id,
+           title=title,
+           category=category,
+           condition=condition,
+           price=price,
+           state=state,
+           lga=lga,
+           description=description,
+           image_filename=filename,
+           whatsapp_number=phone
+        )
 
         db.session.add(listing)
         db.session.commit()
@@ -87,9 +87,12 @@ def edit_listing(id):
         listing.state = request.form.get("state")
         listing.lga = request.form.get("lga")
         listing.description = request.form.get("description")
-        listing.contact_phone = request.form.get("phone")
+        listing.whatsapp_number = request.form.get("phone")
 
         image = request.files.get("image")
+        if not image:
+            flash("Please select an image.", "danger")
+            return redirect(url_for("listing.new_listing"))
         if image and image.filename != "":
             delete_listing_image(listing.image_filename)
             filename, message = save_listing_image(image)
