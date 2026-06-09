@@ -37,13 +37,13 @@ def new_listing():
             title=title,
             category=category,
             condition=condition,
-            price=float(price),
+            price=price,
             state=state,
             lga=lga,
             description=description,
-            image_filename=filename,
-            contact_phone=phone
-        )
+            image_filename=image_filename,
+            whatsapp_number=phone
+            )
 
         db.session.add(listing)
         db.session.commit()
