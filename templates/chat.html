@@ -44,24 +44,14 @@
 <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
 
 <script>
-    const socket = io();
+    const socket = io(window.location.origin, {
+        transports: ["websocket", "polling"]
+    });
 
     const room = "{{ room }}";
-    const currentUserId = {
-        {
-            current_user.id
-        }
-    };
-    const receiverId = {
-        {
-            other_user.id
-        }
-    };
-    const listingId = {
-        {
-            listing.id
-        }
-    };
+    const currentUserId = {{ current_user.id }};
+    const receiverId = {{ other_user.id }};
+    const listingId = {{ listing.id }};
 
     const chatBox = document.getElementById("chatBox");
     const chatForm = document.getElementById("chatForm");
