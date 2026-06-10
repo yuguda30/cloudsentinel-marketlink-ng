@@ -18,7 +18,10 @@ login_manager.login_view = "auth.login"
 login_manager.login_message = "Please login to continue."
 login_manager.login_message_category = "warning"
 
-socketio = SocketIO(cors_allowed_origins="*")
+socketio = SocketIO(
+    cors_allowed_origins="*",
+    async_mode="threading"
+)
 
 online_users = set()
 
