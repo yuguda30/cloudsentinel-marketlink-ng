@@ -10,8 +10,15 @@ chat_bp = Blueprint("chat", __name__, url_prefix="/chat")
 @login_required
 def inbox():
     messages = Message.query.filter(
-        or_(Message.sender_id == current_user.id, Message.receiver_id == current_user.id)
-    ).order_by(desc(Message.created_at)).all()
+        Message.listing_id == listing.id,
+        (
+            ((Message.sender_id == current_user.id) &
+            (Message.receiver_id == other_user.id))
+            |
+            ((Message.sender_id == other_user.id) &
+            (Message.receiver_id == current_user.id))
+         )
+).order_by(Message.created_at.asc()).all()
 
     conversations = {}
 
@@ -63,9 +70,10 @@ def chat_room(listing_id, user_id):
     )
 
     return render_template(
-        "chat.html",
-        listing=listing,
-        other_user=other_user,
-        messages=messages,
-        room=room
+    "chat.html",
+    listing=listing,
+    other_user=other_user,
+    messages=messages,
+    room=room,
+    user_online=str(other_user.id) in online_users
     )
