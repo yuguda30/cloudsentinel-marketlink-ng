@@ -35,7 +35,8 @@
             <nav class="nav-actions">
                 {% if current_user.is_authenticated %}
                 <a href="{{ url_for('dashboard.dashboard') }}" class="nav-btn {% if request.endpoint == 'dashboard.dashboard' %}nav-active{% endif %}">📊 <span>Dashboard</span></a>
-                <a href="{{ url_for('chat.inbox') }}" class="nav-btn {% if request.endpoint.startswith('chat.') %}nav-active{% endif %}">💬 <span>Messages</span></a>
+                <a href="{{ url_for('chat.inbox') }}"> Inbox {% if unread_count > 0 %} <span class="notification-badge">{{ unread_count }}</span>
+                {% endif %} </a>
                 <a href="{{ url_for('auth.logout') }}" class="nav-btn">🚪 <span>Logout</span></a> {% else %}
                 <a href="{{ url_for('auth.login') }}" class="nav-btn">👤 <span>Sign In</span></a>
                 <a href="{{ url_for('auth.register') }}" class="nav-btn">📝 <span>Register</span></a> {% endif %}
