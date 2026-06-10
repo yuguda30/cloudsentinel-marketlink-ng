@@ -1853,20 +1853,15 @@ body {
     }
 }
 
-.notification-badge {
-    background: #f4b223;
-    color: #fff;
-    border-radius: 50%;
-    min-width: 20px;
-    height: 20px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    margin-left: 5px;
-    font-weight: 600;
+.notification-badge{
+    background:#e53935;
+    color:#fff;
+    border-radius:50%;
+    padding:2px 8px;
+    font-size:12px;
+    margin-left:5px;
+    font-weight:700;
 }
-
 .online-status{
     color:#0ea44b;
     font-weight:600;
